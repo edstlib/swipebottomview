@@ -51,52 +51,39 @@ An example is shown below.
 ##### _app:content_
 [reference]: layout content for swipe view
 
-##### _app:bottomr_
+##### _app:bottom_
 [reference]: additional layout at bottom view, like button
-```
 
 ##### _app:titleStyle_
 [reference]: style of title text
 
-### Listening for slide actions on the SlidingButton
-
-You can set a listener to be notified when the user slides across the SlidingButton. An example is shown below.
-
-```kotlin
-        val slidingButton = findViewById<SlidingButton>(R.id.slidingButton)
-        slidingButton.delegate = object : SlidingButtonDelegate {
-            override fun onCompleted() {
-                Toast.makeText(this@MainActivity, "Add some action on here", Toast.LENGTH_SHORT).show()
-            }
-        }
-```
 ### Content and Bottom View
 
 For access content and bottom view you can use getter SwipeBottomView
 ```kotlin
         val contentView = binding.racks.getContentView()
-        val adapter = RackAdapter()
-        val recyclerView = contentView?.findViewById(R.id.recyclerView) as
-                SwipeRecyclerView
+val adapter = RackAdapter()
+val recyclerView = contentView?.findViewById(R.id.recyclerView) as
+        SwipeRecyclerView
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        recyclerView.adapter = adapter
-        
-        val view = binding.emptyState.getBottomView()
-        view?.findViewById<View>(R.id.tvPositiveButton)?.setOnClickListener {
-            QrCodeScannerActivity.open(this, scanResultLauncher)
-        }
+recyclerView.layoutManager = LinearLayoutManager(this)
+recyclerView.adapter = adapter
+
+val view = binding.emptyState.getBottomView()
+view?.findViewById<View>(R.id.tvPositiveButton)?.setOnClickListener {
+    QrCodeScannerActivity.open(this, scanResultLauncher)
+}
 ```
 
 ### Method for swipe actions on the SwipeBottomView
 
 ```kotlin
         binding.racks.delegate = object : SwipeViewDelegate {
-            // y: top op SwipeBottomView
-            override fun onMove(y: Float) {
-                binding.actionBar.isVisible = y <= 0
-            }
-        }
+    // y: top op SwipeBottomView
+    override fun onMove(y: Float) {
+        binding.actionBar.isVisible = y <= 0
+    }
+}
 ```
 
 
