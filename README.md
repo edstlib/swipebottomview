@@ -15,6 +15,7 @@ allprojects {
 Add this to your app `build.gradle`:
 ```groovy
 dependencies {
+    implementation 'com.sothree.slidinguppanel:library:3.4.0'
     implementation 'com.github.edtslib:swipebottomview:latest'
 }
 ```
@@ -61,27 +62,37 @@ An example is shown below.
 
 For access content and bottom view you can use getter SwipeBottomView
 ```kotlin
-        val contentView = binding.racks.getContentView()
-val adapter = RackAdapter()
-val recyclerView = contentView?.findViewById(R.id.recyclerView) as
-        SwipeRecyclerView
-
-recyclerView.layoutManager = LinearLayoutManager(this)
-recyclerView.adapter = adapter
-
-val view = binding.emptyState.getBottomView()
-view?.findViewById<View>(R.id.tvPositiveButton)?.setOnClickListener {
-    QrCodeScannerActivity.open(this, scanResultLauncher)
-}
+            val contentView = binding.racks.contentView
+    val adapter = RackAdapter()
+    val recyclerView = contentView?.findViewById(R.id.recyclerView) as
+            SwipeRecyclerView
+    
+    recyclerView.layoutManager = LinearLayoutManager(this)
+    recyclerView.adapter = adapter
+    
+    val view = binding.emptyState.bottomView
+    view?.findViewById<View>(R.id.tvPositiveButton)?.setOnClickListener {
+        QrCodeScannerActivity.open(this, scanResultLauncher)
+    }
 ```
 
 ### Method for swipe actions on the SwipeBottomView
 
 ```kotlin
-        binding.racks.delegate = object : SwipeViewDelegate {
-    // y: top op SwipeBottomView
-    override fun onMove(y: Float) {
-        binding.actionBar.isVisible = y <= 0
+    val binding = ActivityMainBinding.inflate(layoutInflater)
+    binding.swipeBottomView.delegate = object : SwipeBottomDelegate {
+        override fun onSwiping(offset: Float) {
+        }
+    
+        override fun onStartSwiping() {
+        }
+    
+        override fun onExpanded() {
+        }
+    
+        override fun onCollapsed() {
+        }
+    
     }
 }
 ```

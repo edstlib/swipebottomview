@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import id.co.edtslib.baserecyclerview.BaseRecyclerViewAdapterDelegate
 import id.co.edtslib.baserecyclerview.BaseViewHolder
+import id.co.edtslib.swipebottomview.SwipeBottomDelegate
 import id.co.edtslib.swipebottomview.example.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -15,6 +16,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
+        binding.swipeBottomView.delegate = object : SwipeBottomDelegate {
+            override fun onSwiping(offset: Float) {
+            }
+
+            override fun onStartSwiping() {
+            }
+
+            override fun onExpanded() {
+            }
+
+            override fun onCollapsed() {
+            }
+
+        }
         val view = binding.root
         setContentView(view)
 

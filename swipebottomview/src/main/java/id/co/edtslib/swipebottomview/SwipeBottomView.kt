@@ -9,7 +9,7 @@ import androidx.core.widget.TextViewCompat
 import com.sothree.slidinguppanel.SlidingUpPanelLayout
 
 class SwipeBottomView: FrameLayout {
-    var delegate: SlidingUpPanelLayout.PanelSlideListener? = null
+    var delegate: SwipeBottomDelegate? = null
     var contentView: View? = null
     var bottomView: View? = null
     private var slidingUpPanel: MySlidingUpPanelLayout? = null
@@ -35,7 +35,33 @@ class SwipeBottomView: FrameLayout {
         inflate(context, R.layout.view_bottom_swipe, this)
 
         slidingUpPanel = findViewById(R.id.slidingUpPanel)
-        slidingUpPanel?.addPanelSlideListener(delegate)
+        slidingUpPanel?.addPanelSlideListener(object : SlidingUpPanelLayout.PanelSlideListener {
+            override fun onPanelSlide(panel: View?, slideOffset: Float) {
+                delegate?.onSwiping(slideOffset)
+            }
+
+            override fun onPanelStateChanged(
+                panel: View?,
+                previousState: SlidingUpPanelLayout.PanelState?,
+                newState: SlidingUpPanelLayout.PanelState?
+            ) {
+                when (newState) {
+                    SlidingUpPanelLayout.PanelState.COLLAPSED -> {
+                        delegate?.onCollapsed()
+                    }
+                    SlidingUpPanelLayout.PanelState.EXPANDED -> {
+                        delegate?.onExpanded()
+                    }
+                    SlidingUpPanelLayout.PanelState.DRAGGING -> {
+                        delegate?.onStartSwiping()
+                    }
+                    else -> {
+                        // ignore
+                    }
+                }
+            }
+
+        })
 
         if (attrs != null) {
             val a = context.theme.obtainStyledAttributes(
