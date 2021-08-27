@@ -2,8 +2,8 @@ package id.co.edtslib.swipebottomview
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.View
 import android.widget.FrameLayout
-import androidx.core.widget.TextViewCompat
 
 class SwipeBottomView: FrameLayout {
     var delegate: SwipeViewDelegate? = null
@@ -72,6 +72,11 @@ class SwipeBottomView: FrameLayout {
     override fun setVisibility(visibility: Int) {
         super.setVisibility(VISIBLE)
         swipeView?.visibility = visibility
+    }
+
+    override fun getVisibility(): Int {
+        return if (swipeView?.visibility == null) View.GONE
+            else swipeView!!.visibility
     }
 
     override fun setEnabled(enabled: Boolean) {
