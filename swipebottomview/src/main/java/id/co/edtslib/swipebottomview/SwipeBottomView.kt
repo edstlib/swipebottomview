@@ -13,7 +13,7 @@ class SwipeBottomView: FrameLayout {
     var contentView: View? = null
     var bottomView: View? = null
     private var slidingUpPanel: MySlidingUpPanelLayout? = null
-    private var initialHeightPct = 0.35f
+    private var initialHeightPct = 0.4f
 
     constructor(context: Context) : super(context) {
         init(null)
@@ -112,19 +112,10 @@ class SwipeBottomView: FrameLayout {
                 llSlide.layoutParams.height = h
             }
 
-            post {
-                val max = height*initialHeightPct
-                if (h > max) {
-                    slidingUpPanel?.anchorPoint = initialHeightPct
-                    slidingUpPanel?.panelState = SlidingUpPanelLayout.PanelState.ANCHORED
-                }
-                else {
-                    slidingUpPanel?.panelState = SlidingUpPanelLayout.PanelState.EXPANDED
-                }
+            val max = height*initialHeightPct
 
-
-                visibility = VISIBLE
-            }
+            slidingUpPanel?.anchorPoint = if (h > max) initialHeightPct else 1f
+            slidingUpPanel?.panelState = SlidingUpPanelLayout.PanelState.ANCHORED
         }
     }
 }

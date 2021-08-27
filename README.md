@@ -64,8 +64,7 @@ For access content and bottom view you can use getter SwipeBottomView
 ```kotlin
             val contentView = binding.racks.contentView
     val adapter = RackAdapter()
-    val recyclerView = contentView?.findViewById(R.id.recyclerView) as
-            SwipeRecyclerView
+    val recyclerView = contentView?.findViewById(R.id.recyclerView) 
     
     recyclerView.layoutManager = LinearLayoutManager(this)
     recyclerView.adapter = adapter

@@ -3,6 +3,7 @@ package id.co.edtslib.swipebottomview.example
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import id.co.edtslib.baserecyclerview.BaseRecyclerViewAdapterDelegate
@@ -28,7 +29,6 @@ class MainActivity : AppCompatActivity() {
 
             override fun onCollapsed() {
             }
-
         }
         val view = binding.root
         setContentView(view)
@@ -53,5 +53,7 @@ class MainActivity : AppCompatActivity() {
         val recyclerView = v?.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView?.layoutManager = LinearLayoutManager(this)
         recyclerView?.adapter = adapter
+
+        binding.swipeBottomView.isVisible = true
     }
 }
