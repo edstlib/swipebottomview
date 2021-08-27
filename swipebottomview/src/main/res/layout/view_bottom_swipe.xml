@@ -1,11 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<id.co.edtslib.swipebottomview.MySlidingUpPanelLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/slidingUpPanel"
+    android:gravity="bottom"
+    app:umanoPanelHeight="@dimen/dimen_20dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <id.co.edtslib.swipebottomview.SwipeView
-        android:id="@+id/swipeView"
-        android:layout_gravity="bottom"
+    <FrameLayout
+        android:background="#ff0000"
+        android:layout_width="0dp"
+        android:layout_height="0dp" />
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llSlide"
+        android:background="@drawable/bg_bottom_round"
+        android:orientation="vertical"
+        android:gravity="top"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-</FrameLayout>
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clContent"
+            android:paddingStart="@dimen/dimen_16dp"
+            android:paddingEnd="@dimen/dimen_16dp"
+            android:paddingBottom="@dimen/dimen_16dp"
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp">
+            <View
+                android:id="@+id/vScroll"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="@dimen/dimen_8dp"
+                android:background="@drawable/background_scroll_tray"
+                android:layout_width="@dimen/dimen_42dp"
+                android:layout_height="@dimen/dimen_4dp" />
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTitle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/vScroll"
+                android:layout_marginTop="@dimen/dimen_20dp"
+                android:textColor="#151823"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <FrameLayout
+                android:id="@+id/frameLayoutContent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+        <FrameLayout
+            android:id="@+id/frameLayoutBottom"
+            android:paddingStart="@dimen/dimen_16dp"
+            android:paddingEnd="@dimen/dimen_16dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</id.co.edtslib.swipebottomview.MySlidingUpPanelLayout>

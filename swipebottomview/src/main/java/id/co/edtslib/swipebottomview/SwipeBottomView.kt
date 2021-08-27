@@ -4,10 +4,16 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.FrameLayout
+import android.widget.TextView
+import androidx.core.widget.TextViewCompat
+import com.sothree.slidinguppanel.SlidingUpPanelLayout
 
 class SwipeBottomView: FrameLayout {
-    var delegate: SwipeViewDelegate? = null
-    private var swipeView: SwipeView? = null
+    var delegate: SlidingUpPanelLayout.PanelSlideListener? = null
+    var contentView: View? = null
+    var bottomView: View? = null
+    private var slidingUpPanel: MySlidingUpPanelLayout? = null
+    private var initialHeightPct = 0.35f
 
     constructor(context: Context) : super(context) {
         init(null)
@@ -28,7 +34,8 @@ class SwipeBottomView: FrameLayout {
 
         inflate(context, R.layout.view_bottom_swipe, this)
 
-        swipeView = findViewById(R.id.swipeView)
+        slidingUpPanel = findViewById(R.id.slidingUpPanel)
+        slidingUpPanel?.addPanelSlideListener(delegate)
 
         if (attrs != null) {
             val a = context.theme.obtainStyledAttributes(
@@ -38,49 +45,60 @@ class SwipeBottomView: FrameLayout {
             )
 
             val title = a.getString(R.styleable.SwipeBottomView_title)
-            swipeView?.setTitle(title)
+
+            val tvTitle = findViewById<TextView>(R.id.tvTitle)
+            tvTitle.text = title
 
             val content = a.getResourceId(R.styleable.SwipeBottomView_content, 0)
             if (content != 0) {
-                swipeView?.setContentView(content)
+                val frameLayout = findViewById<FrameLayout>(R.id.frameLayoutContent)
+                contentView = inflate(context, content, null)
+                frameLayout.addView(contentView)
             }
 
             val bottom = a.getResourceId(R.styleable.SwipeBottomView_bottom, 0)
             if (content != 0) {
-                swipeView?.setBottomView(bottom)
+                val frameLayout = findViewById<FrameLayout>(R.id.frameLayoutBottom)
+                bottomView = inflate(context, bottom, frameLayout)
             }
 
             val textStyle = a.getResourceId(R.styleable.SwipeBottomView_titleStyle, 0)
             if (textStyle > 0) {
-                swipeView?.setTitleStyle(textStyle)
+                TextViewCompat.setTextAppearance(tvTitle, textStyle)
             }
+
+            initialHeightPct = a.getFloat(R.styleable.SwipeBottomView_initialHeightPct, 0.3f)
 
             a.recycle()
         }
 
-        swipeView?.delegate = object : SwipeViewDelegate {
-            override fun onMove(y: Float) {
-                delegate?.onMove(y)
+        post {
+            var h = 0
+            if (contentView != null) {
+                h += contentView!!.height
+            }
+            if (bottomView != null) {
+                h += bottomView!!.height
+            }
+
+            if (h < height) {
+                val llSlide = findViewById<View>(R.id.llSlide)
+                llSlide.layoutParams.height = h
+            }
+
+            post {
+                val max = height*initialHeightPct
+                if (h > max) {
+                    slidingUpPanel?.anchorPoint = initialHeightPct
+                    slidingUpPanel?.panelState = SlidingUpPanelLayout.PanelState.ANCHORED
+                }
+                else {
+                    slidingUpPanel?.panelState = SlidingUpPanelLayout.PanelState.EXPANDED
+                }
+
+
+                visibility = VISIBLE
             }
         }
-    }
-
-    fun getContentView() = swipeView?.contentView
-    fun getBottomView() = swipeView?.bottomView
-    fun relayout() = swipeView?.relayout()
-
-    override fun setVisibility(visibility: Int) {
-        super.setVisibility(VISIBLE)
-        swipeView?.visibility = visibility
-    }
-
-    override fun getVisibility(): Int {
-        return if (swipeView?.visibility == null) View.GONE
-            else swipeView!!.visibility
-    }
-
-    override fun setEnabled(enabled: Boolean) {
-        super.setEnabled(enabled)
-        swipeView?.isEnabled = enabled
     }
 }
