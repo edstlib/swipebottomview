@@ -13,7 +13,7 @@ class SwipeBottomView: FrameLayout {
     var contentView: View? = null
     var bottomView: View? = null
     private var slidingUpPanel: MySlidingUpPanelLayout? = null
-    private var initialHeightPct = 0.4f
+    var initialHeightPct = 0.3f
 
     constructor(context: Context) : super(context) {
         init(null)
@@ -37,7 +37,9 @@ class SwipeBottomView: FrameLayout {
         slidingUpPanel = findViewById(R.id.slidingUpPanel)
         slidingUpPanel?.addPanelSlideListener(object : SlidingUpPanelLayout.PanelSlideListener {
             override fun onPanelSlide(panel: View?, slideOffset: Float) {
-                delegate?.onSwiping(slideOffset)
+                if (panel != null) {
+                    delegate?.onSwiping(panel, slideOffset)
+                }
             }
 
             override fun onPanelStateChanged(
@@ -78,12 +80,11 @@ class SwipeBottomView: FrameLayout {
             val content = a.getResourceId(R.styleable.SwipeBottomView_content, 0)
             if (content != 0) {
                 val frameLayout = findViewById<FrameLayout>(R.id.frameLayoutContent)
-                contentView = inflate(context, content, null)
-                frameLayout.addView(contentView)
+                contentView = inflate(context, content, frameLayout)
             }
 
             val bottom = a.getResourceId(R.styleable.SwipeBottomView_bottom, 0)
-            if (content != 0) {
+            if (bottom != 0) {
                 val frameLayout = findViewById<FrameLayout>(R.id.frameLayoutBottom)
                 bottomView = inflate(context, bottom, frameLayout)
             }
@@ -99,23 +100,23 @@ class SwipeBottomView: FrameLayout {
         }
 
         post {
-            var h = 0
-            if (contentView != null) {
-                h += contentView!!.height
-            }
-            if (bottomView != null) {
-                h += bottomView!!.height
-            }
-
-            if (h < height) {
-                val llSlide = findViewById<View>(R.id.llSlide)
-                llSlide.layoutParams.height = h
-            }
-
-            val max = height*initialHeightPct
-
-            slidingUpPanel?.anchorPoint = if (h > max) initialHeightPct else 1f
-            slidingUpPanel?.panelState = SlidingUpPanelLayout.PanelState.ANCHORED
+            relayout()
         }
     }
+
+    fun relayout() {
+        val clContent = findViewById<View>(R.id.clContent)
+
+        val h = clContent.height
+        val max = height*initialHeightPct
+
+        slidingUpPanel?.anchorPoint = if (h > max && h > 0) max/h else 1f
+        slidingUpPanel?.panelState = SlidingUpPanelLayout.PanelState.ANCHORED
+    }
+
+    fun setIsChildScrollable(scrollable: Boolean) {
+        slidingUpPanel?.isChildScrollable = scrollable
+    }
+
+
 }

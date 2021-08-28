@@ -9,6 +9,7 @@
     <id.co.edtslib.swipebottomview.SwipeBottomView
         android:id="@+id/swipeBottomView"
         app:title="@string/app_name"
+        app:initialHeightPct="0.5"
         app:content="@layout/content"
         app:bottom="@layout/bottom"
         android:layout_width="match_parent"

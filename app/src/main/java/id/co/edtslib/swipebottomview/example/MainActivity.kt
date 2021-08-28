@@ -2,6 +2,7 @@ package id.co.edtslib.swipebottomview.example
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,7 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         val binding = ActivityMainBinding.inflate(layoutInflater)
         binding.swipeBottomView.delegate = object : SwipeBottomDelegate {
-            override fun onSwiping(offset: Float) {
+            override fun onSwiping(panel: View, offset: Float) {
             }
 
             override fun onStartSwiping() {
@@ -41,6 +42,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onClick(t: String, position: Int, holder: BaseViewHolder<String>?) {
                 Toast.makeText(this@MainActivity, "Hai $t", Toast.LENGTH_SHORT).show()
+                binding.swipeBottomView.setIsChildScrollable(true)
             }
 
             override fun onDraw(t: String, position: Int) {
