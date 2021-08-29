@@ -50,9 +50,15 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        val v = binding.swipeBottomView.contentView
+        val mainView = binding.swipeBottomView.mainView
+        mainView?.findViewById<View>(R.id.textView)?.setOnClickListener {
+            Toast.makeText(this, "hai", Toast.LENGTH_SHORT).show()
+        }
 
-        val recyclerView = v?.findViewById<RecyclerView>(R.id.recyclerView)
+
+        val slideView = binding.swipeBottomView.slideView
+
+        val recyclerView = slideView?.findViewById<RecyclerView>(R.id.recyclerView)
         recyclerView?.layoutManager = LinearLayoutManager(this)
         recyclerView?.adapter = adapter
 

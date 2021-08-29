@@ -9,10 +9,11 @@
         <entry key="app/src/main/res/layout/adapter_test.xml" value="0.19635416666666666" />
         <entry key="app/src/main/res/layout/bottom.xml" value="0.2558876811594203" />
         <entry key="app/src/main/res/layout/content.xml" value="0.19635416666666666" />
+        <entry key="app/src/main/res/layout/main.xml" value="0.20364583333333333" />
         <entry key="swipebottomview/src/main/res/drawable/bg_bottom_round.xml" value="0.28854166666666664" />
         <entry key="swipebottomview/src/main/res/layout/adapter_test.xml" value="0.19635416666666666" />
         <entry key="swipebottomview/src/main/res/layout/bottom.xml" value="0.19635416666666666" />
-        <entry key="swipebottomview/src/main/res/layout/view_bottom_swipe.xml" value="0.17147922998986828" />
+        <entry key="swipebottomview/src/main/res/layout/view_bottom_swipe.xml" value="0.1" />
         <entry key="swipebottomview/src/main/res/layout/view_swipe.xml" value="0.1671195652173913" />
       </map>
     </option>

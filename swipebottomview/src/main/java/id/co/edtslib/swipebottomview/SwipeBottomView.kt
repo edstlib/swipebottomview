@@ -10,7 +10,8 @@ import com.sothree.slidinguppanel.SlidingUpPanelLayout
 
 class SwipeBottomView: FrameLayout {
     var delegate: SwipeBottomDelegate? = null
-    var contentView: View? = null
+    var mainView: View? = null
+    var slideView: View? = null
     var bottomView: View? = null
     private var slidingUpPanel: MySlidingUpPanelLayout? = null
     var initialHeightPct = 0.3f
@@ -77,10 +78,17 @@ class SwipeBottomView: FrameLayout {
             val tvTitle = findViewById<TextView>(R.id.tvTitle)
             tvTitle.text = title
 
-            val content = a.getResourceId(R.styleable.SwipeBottomView_content, 0)
+            val content = a.getResourceId(R.styleable.SwipeBottomView_main, 0)
             if (content != 0) {
+                val frameLayout = findViewById<FrameLayout>(R.id.flMain)
+                mainView = inflate(context, content, frameLayout)
+            }
+
+
+            val slide = a.getResourceId(R.styleable.SwipeBottomView_slide, 0)
+            if (slide != 0) {
                 val frameLayout = findViewById<FrameLayout>(R.id.frameLayoutContent)
-                contentView = inflate(context, content, frameLayout)
+                slideView = inflate(context, slide, frameLayout)
             }
 
             val bottom = a.getResourceId(R.styleable.SwipeBottomView_bottom, 0)

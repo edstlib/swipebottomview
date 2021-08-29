@@ -3,7 +3,8 @@
     <declare-styleable name="SwipeBottomView">
         <attr name="title" format="string" />
         <attr name="titleStyle" format="reference" />
-        <attr name="content" format="reference" />
+        <attr name="main" format="reference" />
+        <attr name="slide" format="reference" />
         <attr name="bottom" format="reference" />
         <attr name="initialHeightPct" format="float" />
     </declare-styleable>

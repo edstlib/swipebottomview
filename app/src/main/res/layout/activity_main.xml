@@ -5,12 +5,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
     <id.co.edtslib.swipebottomview.SwipeBottomView
         android:id="@+id/swipeBottomView"
         app:title="@string/app_name"
         app:initialHeightPct="0.5"
-        app:content="@layout/content"
+        app:main="@layout/main"
+        app:slide="@layout/slide"
         app:bottom="@layout/bottom"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
