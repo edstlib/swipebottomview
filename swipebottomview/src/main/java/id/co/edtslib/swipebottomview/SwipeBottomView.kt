@@ -84,7 +84,6 @@ class SwipeBottomView: FrameLayout {
                 mainView = inflate(context, content, frameLayout)
             }
 
-
             val slide = a.getResourceId(R.styleable.SwipeBottomView_slide, 0)
             if (slide != 0) {
                 val frameLayout = findViewById<FrameLayout>(R.id.frameLayoutContent)
@@ -126,5 +125,26 @@ class SwipeBottomView: FrameLayout {
         slidingUpPanel?.isChildScrollable = scrollable
     }
 
+    fun setTittle(resId: Int) {
+        val tvTitle = findViewById<TextView>(R.id.tvTitle)
+        tvTitle.setText(resId)
+
+    }
+
+    fun setSlideView(layoutId: Int): View? {
+        val frameLayout = findViewById<FrameLayout>(R.id.frameLayoutContent)
+        frameLayout.removeAllViews()
+        slideView = inflate(context, layoutId, frameLayout)
+
+        return slideView
+    }
+
+    fun setBottomView(layoutId: Int): View? {
+        val frameLayout = findViewById<FrameLayout>(R.id.frameLayoutBottom)
+        frameLayout.removeAllViews()
+        bottomView = inflate(context, layoutId, frameLayout)
+
+        return bottomView
+    }
 
 }
