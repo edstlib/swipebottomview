@@ -13,7 +13,7 @@ class SwipeBottomView: FrameLayout {
     var mainView: View? = null
     var slideView: View? = null
     var bottomView: View? = null
-    private var slidingUpPanel: MySlidingUpPanelLayout? = null
+    var slidingUpPanel: MySlidingUpPanelLayout? = null
     var initialHeightPct = 0.3f
 
     constructor(context: Context) : super(context) {
@@ -109,6 +109,15 @@ class SwipeBottomView: FrameLayout {
         post {
             relayout()
         }
+    }
+
+
+    fun expand() {
+        slidingUpPanel?.panelState = SlidingUpPanelLayout.PanelState.EXPANDED
+    }
+
+    fun collapse() {
+        slidingUpPanel?.panelState = SlidingUpPanelLayout.PanelState.COLLAPSED
     }
 
     fun relayout() {
