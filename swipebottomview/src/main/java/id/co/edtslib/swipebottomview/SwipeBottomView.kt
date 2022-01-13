@@ -7,6 +7,7 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.core.widget.TextViewCompat
 import com.sothree.slidinguppanel.SlidingUpPanelLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 
 class SwipeBottomView: FrameLayout {
     var delegate: SwipeBottomDelegate? = null
@@ -99,6 +100,12 @@ class SwipeBottomView: FrameLayout {
             val textStyle = a.getResourceId(R.styleable.SwipeBottomView_titleStyle, 0)
             if (textStyle > 0) {
                 TextViewCompat.setTextAppearance(tvTitle, textStyle)
+            }
+
+            val contentPadding = a.getDimension(R.styleable.SwipeBottomView_contentPadding, -1f)
+            if (contentPadding >= 0) {
+                val clContent = findViewById<ConstraintLayout>(R.id.clContent)
+                clContent.setPadding(contentPadding.toInt(), clContent.paddingTop, contentPadding.toInt(), clContent.paddingBottom)
             }
 
             initialHeightPct = a.getFloat(R.styleable.SwipeBottomView_initialHeightPct, 0.3f)

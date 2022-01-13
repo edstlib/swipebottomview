@@ -7,5 +7,6 @@
         <attr name="slide" format="reference" />
         <attr name="bottom" format="reference" />
         <attr name="initialHeightPct" format="float" />
+        <attr name="contentPadding" format="dimension" />
     </declare-styleable>
 </resources>

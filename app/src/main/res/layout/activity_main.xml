@@ -4,10 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#000000"
     tools:context=".MainActivity">
     <id.co.edtslib.swipebottomview.SwipeBottomView
         android:id="@+id/swipeBottomView"
         app:title="@string/app_name"
+        app:contentPadding="0dp"
         app:initialHeightPct="0.5"
         app:main="@layout/main"
         app:slide="@layout/slide"
