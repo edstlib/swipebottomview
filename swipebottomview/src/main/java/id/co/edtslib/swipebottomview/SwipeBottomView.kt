@@ -145,7 +145,9 @@ class SwipeBottomView: FrameLayout {
     fun setTittle(resId: Int) {
         val tvTitle = findViewById<TextView>(R.id.tvTitle)
         tvTitle.isVisible = resId != 0
-        tvTitle.setText(resId)
+        if (resId != 0) {
+            tvTitle.setText(resId)
+        }
 
     }
 
