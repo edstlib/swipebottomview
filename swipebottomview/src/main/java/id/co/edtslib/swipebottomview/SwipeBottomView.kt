@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.core.widget.TextViewCompat
 import com.sothree.slidinguppanel.SlidingUpPanelLayout
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 
 class SwipeBottomView: FrameLayout {
     var delegate: SwipeBottomDelegate? = null
@@ -143,6 +144,7 @@ class SwipeBottomView: FrameLayout {
 
     fun setTittle(resId: Int) {
         val tvTitle = findViewById<TextView>(R.id.tvTitle)
+        tvTitle.isVisible == resId != 0
         tvTitle.setText(resId)
 
     }
