@@ -103,6 +103,12 @@ class SwipeBottomView: FrameLayout {
                 TextViewCompat.setTextAppearance(tvTitle, textStyle)
             }
 
+            val backgroundColor = a.getColor(R.styleable.SwipeBottomView_backgroundColor, 0)
+            if (backgroundColor != 0) {
+                val slidingUpPanel = findViewById<View>(R.id.slidingUpPanel)
+                slidingUpPanel.setBackgroundColor(backgroundColor)
+            }
+
             val contentPadding = a.getDimension(R.styleable.SwipeBottomView_contentPadding, -1f)
             if (contentPadding >= 0) {
                 val clContent = findViewById<ConstraintLayout>(R.id.clContent)

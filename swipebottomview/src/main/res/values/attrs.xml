@@ -8,5 +8,6 @@
         <attr name="bottom" format="reference" />
         <attr name="initialHeightPct" format="float" />
         <attr name="contentPadding" format="dimension" />
+        <attr name="backgroundColor" format="color" />
     </declare-styleable>
 </resources>
